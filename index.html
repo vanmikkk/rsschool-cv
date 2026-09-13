@@ -7,9 +7,20 @@
     <title>CV Layout. Cross-Check</title>
 </head>
 <body>
+    <div class="bg">
+    <span class="bubble bubble-1"></span>
+    <span class="bubble bubble-2"></span>
+    <span class="bubble bubble-3"></span>
+    <span class="bubble bubble-4"></span>
+  </div>
     <header>
-        <div class="avatar"><img src="./images/avatar/" alt="avatar"></div>
-        <h1>Ivan (vanmik), full stack Developer</h1>
+        <div class="container">
+            <div class="header_inner">
+                <div class="avatar"><img src="./images/avatar/avatar.jpg" alt="avatar"></div>
+                <!--Не хочу вставлять свое фото, но и какого-либо аватара не имею-->
+                <h1>Ivan (vanmik), full stack Developer</h1>
+            </div>
+        </div>
     </header>
     <main>
         <div class="container">
@@ -17,8 +28,9 @@
                 <section>
                     <div class="name_num">
                         <h2>Contacts</h2>
-                        <p>01</p>
+                        <h2>01</h2>
                     </div>
+                    <hr>
                     <ul>
                         <li><a href="https://github.com/vanmikkk">GitHub.com/vanmikkk</a></li>
                         <li><a href="https://t.me/blackteawithme">@blackteawithme</a></li>
@@ -28,16 +40,17 @@
                 <section>
                     <div class="name_num">
                         <h2>About</h2>
-                        <p>02</p>
+                        <h2>02</h2>
                     </div>
+                    <hr>
                     <p>My goal is to become a full-stack developer.I hold a specialized secondary education qualification as a Web and Multimedia Application Developer.I have experience developing web applications using PHP, Laravel, Vue.js, and other modern web technologies.</p>
                 </section>
                 <section>
                     <div class="name_num">
                         <h2>Skills</h2>
-                        <p>03</p>
+                        <h2>03</h2>
                     </div>
-                    <p>Programming Languages, Technologies and Frameworks</p>
+                    <hr>
                     <ul>
                         <li>HTML</li>
                         <li>CSS</li>
@@ -52,60 +65,93 @@
                 <section>
                     <div class="name_num">
                         <h2>Code example</h2>
-                        <p>04</p>
+                        <h2>04</h2>
                     </div>
-                    <div class="code_block">
-                        
-                    </div>
+                    <hr>
+<pre class="code_block"><code>
+public function indexId(Request $request){
+    $token = $request->bearerToken();
+    $user_id = optional(Token::where("token", $token)->first())->user_id;
+    if($user_id == null){
+        return response()->json("Неверный токен авторизации", 401);
+    }
+    $course_id = $request->input("course_id");
+    
+    $course = User_in_course::where("user_id", $user_id)->where("course_id", $course_id)->first();
+    $ownerCourse = Course::where("user_id", $user_id)->where("id", $course_id)->first();
+    
+    if($course == null && $ownerCourse == null){
+        return response()->json("У вас нет доступа к этому курсу", 422);
+    }
+    
+    $course = Course::where("id", $request->input("course_id"))->first();
+    
+    return response()->json($course, 200);
+}
+</code></pre>
                 </section>
+                <div class="right_section">
+                    <section>
+                        <div class="name_num">
+                            <h2>Education</h2>
+                            <h2>05</h2>
+                        </div>
+                        <hr>
+                        <h3>Secondary Specialized Education</h3>
+                        <p>Specialty: "Web and Multimedia Application Developer"</p>
+                    </section>
+                    <section>
+                        <div class="name_num">
+                            <h2>English language</h2>
+                            <h2>06</h2>
+                        </div>
+                        <hr>
+                        <h3>A2-B1</h3>
+                        <p>I am studying English and continuing to develop my skills in reading, understanding technical documentation, and communication.</p>
+                    </section>
+                </div>
                 <section>
                     <div class="name_num">
                         <h2>Experience</h2>
-                        <p>05</p>
+                        <h2>07</h2>
                     </div>
-                    <article>
-                        <h3>Laravel 10 + Vue.js Graduation Project</h3>
-                        <p>As part of the graduation project, a web application was developed using Laravel 10 and Vue.js.The project involved developing the server-side using Laravel and the client-side using Vue.js.The project is currently unavailable online, as hosting is no longer being paid for.</p>
-                    </article>
-                    <article>
-                        <h3>TenLab - Intern</h3>
-                        <p>Participated in testing an application designed to combine web development capabilities with a Figma-style graphic editor, enabling users to visually create an interface and generate a finished website.</p>
-                        <p>During the internship:</p>
-                        <ul>
-                            <li>explored the application's operation without existing instructions or documentation;</li>
-                            <li>independently familiarized myself with the system's functionality;</li>
-                            <li>participated in testing the application;</li>
-                            <li>analyzed emerging issues and the application's operational characteristics.</li>
-                        </ul>
-                    </article>
-                </section>
-                <section>
-                    <div class="name_num">
-                        <h2>Education</h2>
-                        <p>06</p>
+                    <hr>
+                    <div class="articles">
+                        <article>
+                            <h3>Laravel 10 + Vue.js Graduation Project</h3>
+                            <p>As part of the graduation project, a web application was developed using Laravel 10 and Vue.js.The project involved developing the server-side using Laravel and the client-side using Vue.js.The project is currently unavailable online, as hosting is no longer being paid for.</p>
+                        </article>
+                        <article>
+                            <h3>TenLab - Intern</h3>
+                            <p>Participated in testing an application designed to combine web development capabilities with a Figma-style graphic editor, enabling users to visually create an interface and generate a finished website.</p>
+                        </article>
+                        <article>
+                            <h3>During the internship:</h3>
+                            <ul>
+                                <li>explored the application's operation without existing instructions or documentation;</li>
+                                <li>independently familiarized myself with the system's functionality;</li>
+                                <li>participated in testing the application;</li>
+                                <li>analyzed emerging issues and the application's operational characteristics.</li>
+                            </ul>
+                        </article>
                     </div>
-                    <p>Secondary Specialized Education</p>
-                    <p>Specialty: "Web and Multimedia Application Developer"</p>
                 </section>
-                <section>
-                    <div class="name_num">
-                        <h2>English language</h2>
-                        <p>07</p>
-                    </div>
-                    <p>A2-B1</p>
-                    <p>I am studying English and continuing to develop my skills in reading, understanding technical documentation, and communication.</p>
-                </section>
+                
             </div>
         </div>
     </main>
     <footer>
-        <section>
-            <a href="https://github.com/vanmikkk">GitHub.com/vanmikkk</a>
-            <p>2026</p>
-        </section>
-        <section>
-            <div class="logo"><img src="./images/logo/rs-school-logo.svg" alt=""></div>
-        </section>
+        <div class="container">
+            <div class="footer_inner">
+                <div class="footer_block">
+                    <a href="https://github.com/vanmikkk">GitHub.com/vanmikkk</a>
+                    <h3>2026</h3>
+                </div>
+                <div class="footer_block">
+                    <div class="logo"><a href="https://rs.school/courses/javascript"><img src="./images/logo/rs-school-logo.svg" alt="rs-school-logo"></a></div>
+                </div>
+            </div>
+        </div>
     </footer>
 </body>
 </html>
